@@ -25,3 +25,9 @@ actions must work with "Dispatch"
 To get a state from Slice, must reference slice's name property
 Because a state has been divided into several slices.
 (if work with Redux other than "toolkit", then use "state" is OK)
+
+## javascript find() goes here
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find  
+Each item in the Cart is not just a Product, but much more information such as total price
+Be aware of how to pass action to reducer !!!
