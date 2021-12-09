@@ -13,3 +13,9 @@ About how to write "useSlice" : https://redux-toolkit.js.org/usage/usage-guide#s
 
 It define the scope of the state
 It must work with "store"
+
+## for actions
+
+need useDispatch to generate a "dispatch"
+need import Actions from Slices
+actions must work with "Dispatch"
