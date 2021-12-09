@@ -6,6 +6,8 @@ import { useEffect, Fragment } from "react";
 import Notification from "./components/UI/Notification";
 import { uiActions } from "./store/ui-slice";
 
+let isInitial = true;
+
 function App() {
   const cartIsVisible = useSelector((state) => state.ui.cartIsVisible);
   const cart = useSelector((state) => state.cart);
@@ -28,7 +30,7 @@ function App() {
         })
       );
       const response = await fetch(
-        "https://react-http-69ae2-default-rtdb.firebaseio.com/cart.json",
+        "https://react-http-69ae2-default-rtdb.firebaseio.com/car",
         {
           method: "PUT",
           body: JSON.stringify(cart),
@@ -46,7 +48,13 @@ function App() {
         })
       );
     };
-
+    //  Check if the Application is just init.
+    //  For the initiation, we don't send HTTP
+    //  For other state update, we will send HTTP
+    if (isInitial) {
+      isInitial = false;
+      return;
+    }
     // Call the defined asynchronous function
     sendCartData().catch((error) => {
       dispatch(
