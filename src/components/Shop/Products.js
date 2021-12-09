@@ -17,16 +17,15 @@ const Products = (props) => {
     },
   ];
 
-  const productList = DUMMY_PRODUCTS.map((item) => {
-    return (
-      <ProductItem
-        key={item.id}
-        title={item.title}
-        price={item.price}
-        description={item.description}
-      />
-    );
-  });
+  const productList = DUMMY_PRODUCTS.map((item) => (
+    <ProductItem
+      key={item.id}
+      id={item.id}
+      title={item.title}
+      price={item.price}
+      description={item.description}
+    />
+  ));
   return (
     <section className={classes.products}>
       <h2>Buy your favorite products</h2>
