@@ -75,7 +75,12 @@ export const fetchCartData = () => {
     // run the asynchronous function
     try {
       const cartData = await fetchData();
-      dispatch(cartActions.replaceCart(cartData));
+      dispatch(
+        cartActions.replaceCart({
+          items: cartData.items || [],
+          totalQuantity: cartData.totalQuantity,
+        })
+      );
     } catch {
       dispatch(
         uiActions.showNotification({
