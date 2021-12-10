@@ -24,7 +24,13 @@ function App() {
       isInitial = false;
       return;
     }
-    dispatch(sendCartData(cart)); // this "sendCartDate" is Thunk
+    // The Fetching data will use "replaceCart" Reducer
+    // Which will not set "changed" property to "true"
+    // this is the trick by which to avoid the very first Fetching action
+    // would cause an unnecessary  HTTP Sending-data action.
+    if (cart.changed) {
+      dispatch(sendCartData(cart));
+    } // this "sendCartDate" is Thunk
   }, [cart, dispatch]);
   // the "dispatch" is handled by the redux and will never change
   // but we still need to put it here as some IDE will complain
@@ -32,7 +38,7 @@ function App() {
   /*This will fetch Cart data from Firebase once the App is loaded */
   useEffect(() => {
     dispatch(fetchCartData());
-  }, []);
+  }, [dispatch]); // dispatch will not change actually!
   return (
     <Fragment>
       {notification && (
