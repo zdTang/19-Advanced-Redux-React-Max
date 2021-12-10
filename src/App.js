@@ -4,7 +4,7 @@ import Products from "./components/Shop/Products";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, Fragment } from "react";
 import Notification from "./components/UI/Notification";
-import { uiActions } from "./store/ui-slice";
+import { sendCartData } from "./store/cart-slice";
 
 let isInitial = true;
 
@@ -20,51 +20,11 @@ function App() {
    * option, then we can fire Http Request
    */
   useEffect(() => {
-    // define an Async function to wrap the "fetch"
-    const sendCartData = async () => {
-      dispatch(
-        uiActions.showNotification({
-          status: "pending",
-          title: "Sending...",
-          message: "Sending cart data!",
-        })
-      );
-      const response = await fetch(
-        "https://react-http-69ae2-default-rtdb.firebaseio.com/car",
-        {
-          method: "PUT",
-          body: JSON.stringify(cart),
-        }
-      );
-      //
-      if (!response.ok) {
-        throw new Error("Sending cart data failed.");
-      }
-      dispatch(
-        uiActions.showNotification({
-          status: "success",
-          title: "Success!",
-          message: "Sending cart data successfully!",
-        })
-      );
-    };
-    //  Check if the Application is just init.
-    //  For the initiation, we don't send HTTP
-    //  For other state update, we will send HTTP
     if (isInitial) {
       isInitial = false;
       return;
     }
-    // Call the defined asynchronous function
-    sendCartData().catch((error) => {
-      dispatch(
-        uiActions.showNotification({
-          status: "error",
-          title: "Error!",
-          message: "Sending cart data failed.",
-        })
-      );
-    });
+    dispatch(sendCartData(cart)); // this "sendCartDate" is Thunk
   }, [cart, dispatch]);
   // the "dispatch" is handled by the redux and will never change
   // but we still need to put it here as some IDE will complain

@@ -65,3 +65,12 @@ This approach works, but will make the component very fat, and the Reducer just 
 ### Option two (Fat Reducer)
 
 We still put those "logic" in the Reducer, once the Reducer finished updating state,at another component, we should monitor and be aware of it and will fire HTTP request to save the current data to remote back end.
+
+## Thunk
+
+https://redux-toolkit.js.org/api/createAsyncThunk
+
+this approach can keep our component lean. For instance, the App.js has a very simple useEffect which only dispatch a action creator. Heavy job will be taken by the function in the Redux.
+
+Study the function. too many asynchronous.  
+Watch the Max's lecture to understand how Redux Toolkit deal with those Action creator: Redux will expect an Action object, it also expect an function.
