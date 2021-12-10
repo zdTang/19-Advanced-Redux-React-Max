@@ -4,7 +4,7 @@ import Products from "./components/Shop/Products";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, Fragment } from "react";
 import Notification from "./components/UI/Notification";
-import { sendCartData } from "./store/cart-actions";
+import { sendCartData, fetchCartData } from "./store/cart-actions";
 
 let isInitial = true;
 
@@ -28,6 +28,11 @@ function App() {
   }, [cart, dispatch]);
   // the "dispatch" is handled by the redux and will never change
   // but we still need to put it here as some IDE will complain
+
+  /*This will fetch Cart data from Firebase once the App is loaded */
+  useEffect(() => {
+    dispatch(fetchCartData());
+  }, []);
   return (
     <Fragment>
       {notification && (
